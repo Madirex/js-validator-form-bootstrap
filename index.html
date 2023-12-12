@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>Formulario de Envíos Internacional</title>
+</head>
+<body>
+    <div id="content" class="container">
+            <h1 class="mt-4">Formulario de Envíos Internacional</h1>
+            <form id="form" class="mt-4">
+                <div class="d-flex row">
+                <!-- Fecha -->
+                <div class="form-group mb-3 mx-2">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="sendDate">Fecha (*):</label>
+                    </div>
+                    <input type="text" class="form-control" id="sendDate" placeholder="dd/mm/aaaa" name="sendDate" required oninput="inputOnChange('sendDate', 'error-sendDate')" onblur="validateFieldByType('sendDate', 'error-sendDate')">
+                    </div>
+                    <p class="invalid-feedback" id="error-sendDate">Comprueba que la fecha esté en formato correcto (dd/mm/aaaa) y que sea posterior al día de hoy.</p>
+                </div>
+
+                <!-- Empresa -->
+                <div class="form-group mb-3 mx-2">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Empresa (*):</span>
+                    </div>
+                    <input type="text" class="form-control" id="company" placeholder="Empresa" name="company" required oninput="inputOnChange('company', 'error-company')" onblur="validateFieldByType('company', 'error-company')">
+                    </div>
+                    <p class="invalid-feedback" id="error-company">El nombre de la empresa debe de tener entre 2 y 100 caracteres.</p>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group mb-3 mx-2">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Email (*):</span>
+                    </div>
+                    <input type="email" class="form-control" id="email" placeholder="Email" name="email" required onblur="validateFieldByType('email', 'error-email')">
+                    </div>
+                    <p class="invalid-feedback" id="error-email">Ingresa un email válido.</p>
+                </div>
+            </div>
+
+            <!-- Instagram, cliente y origen -->
+            <div class="d-flex row">
+                <!-- Instagram -->
+                <div class="form-group mb-3 mx-2">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Instagram (*):</span>
+                    </div>
+                    <input type="instagram" class="form-control" id="instagram" placeholder="Instagram" name="instagram" required onblur="validateFieldByType('instagram', 'error-instagram')">
+                    </div>
+                    <p class="invalid-feedback" id="error-instagram">Ingresa un usuario de Instagram válido. Debe de empezar con @. No puede contener caracteres especiales y debe de haber un nombre de usuario.</p>
+                </div>
+
+                <!-- Cliente y origen -->
+                <div class="d-flex row">
+                    <!-- Cliente -->
+                    <div class="col-auto mx-2 align-self-center">
+                        <input type="checkbox" id="client" name="client" value="Cliente" onclick="validateFieldByType('currentOrigin', 'error-currentOrigin')" onchange="validateFieldByType('currentOrigin', 'error-currentOrigin')">
+                        <label for="client">Cliente</label><br>
+                    </div>
+                    <!-- Origen -->
+                    <div class="form-group mb-3">
+                        <div class="input-group">
+                        <select class="form-control" id="currentOrigin" name="currentOrigin" disabled onblur="validateFieldByType('currentOrigin', 'error-currentOrigin')" onchange="validateFieldByType('currentOrigin', 'error-currentOrigin')">
+                            <option value="none">Seleccione origen</option>
+                            <option value="prensa">Prensa</option>
+                            <option value="redes">Redes</option>
+                            <option value="amigos">Amigos</option>
+                        </select>
+                        </div>
+                        <div class="invalid-feedback" id="error-currentOrigin">Debes seleccionar un origen.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tipo de envío y país-->
+            <div class="d-flex row">
+                <!-- Tipo de envío -->
+                <div class="d-flex row">
+                    <div class="form-group mb-3" id="sendType">
+                        <div class="form-check mx-2" style="float: left;">
+                            <input type="radio" class="form-check-input" id="national" name="sendType" value="Nacional" required onclick="validateFieldByType('sendType', 'error-sendType')" onchange="validateFieldByType('sendType', 'error-sendType')">
+                            <label class="form-check-label" for="national">Nacional</label>
+                        </div>
+                        <div class="form-check mx-2" style="float: left;">
+                            <input type="radio" class="form-check-input" id="foreigner" name="sendType" value="Extranjero" required onclick="validateFieldByType('sendType', 'error-sendType')" onchange="validateFieldByType('sendType', 'error-sendType')">
+                            <label class="form-check-label" for="foreigner">Extranjero</label>
+                        </div>
+                        <div class="invalid-feedback" id="error-sendType">Selecciona un tipo de envío.</div>
+                    </div>
+                </div>
+
+
+                <!-- País -->
+                <div class="form-group mb-3 mx-3" id="countryContainer" style="display:none;">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">País:</span>
+                    </div>
+                    <input type="text" class="form-control" id="country" placeholder="País" name="country" disabled oninput="inputOnChange('country', 'error-country')" onblur="validateFieldByType('country', 'error-country')">
+                    </div>
+                    <p class="invalid-feedback" id="error-country">Es necesario poner el país si eres extranjero. El nombre debe de tener entre 2 y 50 caracteres.</p>
+                </div>
+            </div>
+
+
+            <!-- Tabla de envíos -->
+            <h2 class="mt-4">Envíos</h1>
+            <div class="container">
+                <div class="d-flex row">
+                    <div class="form-group mx-2">
+                        <label for="destination">Destino:</label>
+                        <select class="form-control" id="destination" onchange="calculatePrice()">
+                            <option value="spain">España</option>
+                            <option value="europe">Europa</option>
+                            <option value="america">América</option>
+                        </select>
+                    </div>
+                    <div class="form-group mx-2">
+                        <label for="weight">Peso (Kg):</label>
+                        <input type="number" step="0.01" class="form-control" id="weight" max="3" min="0" placeholder="0.00" oninput="calculatePrice()" onchange="calculatePrice()">
+                    </div>
+                    <div class="form-group mx-2">
+                        <label for="shippingType">Tipo de envío:</label>
+                        <select class="form-control" id="shippingType">
+                            <option value="-">-</option>
+                            <option value="certificado">CERTIFICADO</option>
+                            <option value="paquete">PAQUETE</option>
+                        </select>
+                    </div>
+                    <div class="form-group mx-2">
+                        <label for="price" class="visually-hidden">Precio:</label>
+                        <input type="text" class="form-control" id="price" readonly>
+                    </div>
+                    <div class="col-auto mx-2 align-self-center">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="addToSendList()">Añadir</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Tabla de contenido -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Destino</th>
+                            <th>Peso</th>
+                            <th>Tipo de Envío</th>
+                            <th>Precio</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="send-table">
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- Totales -->
+            <h2>Totales</h2>
+            <div class="container">
+            
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Envíos:</span>
+                    </div>
+                    <input type="text" class="form-control" id="totalShipments" disabled>
+                </div>
+            
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Peso:</span>
+                    </div>
+                    <input type="text" class="form-control" id="totalWeight" disabled>
+                </div>
+            
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Importe España:</span>
+                    </div>
+                    <input type="text" class="form-control" id="totalAmountSpain" disabled>
+                </div>
+            
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Importe Europa:</span>
+                    </div>
+                    <input type="text" class="form-control" id="totalAmountEurope" disabled>
+                </div>
+            
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Importe América:</span>
+                    </div>
+                    <input type="text" class="form-control" id="totalAmountAmerica" disabled>
+                </div>
+            
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Importe Total:</span>
+                    </div>
+                    <input type="text" class="form-control" id="totalAmount" disabled>
+                </div>
+            </div>
+        
+            <button id="sendData" type="submit" class="btn btn-success">Enviar</button>
+
+            <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Resultado del formulario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <div id="modal-message"></div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <footer>
+    <script src="validators.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

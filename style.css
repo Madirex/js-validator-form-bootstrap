@@ -1,0 +1,113 @@
+body{
+    font-family: Vegur, 'PT Sans', Verdana, sans-serif;
+    background: rgb(13,17,22);
+    background: linear-gradient(5deg, rgba(13,17,22,1) 0%, rgba(8,59,133,1) 100%, rgba(9,9,121,1) 100%, rgba(25,0,36,1) 100%, rgba(0,255,214,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+h1, h2{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+#content{
+    display:block;
+    margin:auto;
+    background-color:rgb(231, 231, 231);
+    border-radius: 1em;
+    width: 90%;
+    margin-top:1em;
+    margin-bottom:1em;
+    padding:1em;
+    padding-bottom: 2em;
+}
+
+#sendType{
+    padding-left: 1em;
+}
+
+#sendData{
+    display: block;
+    margin: auto;
+    width: 80%;
+}
+
+.invalid-feedback{
+    padding:10px;
+}
+
+/* tabla responsive */
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+  }
+  
+  table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+  }
+  
+  table th,
+  table td {
+    padding: .625em;
+    text-align: center;
+  }
+  
+  table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  
+  @media screen and (max-width: 600px) {
+    table {
+      border: 0;
+    }
+  
+    table caption {
+      font-size: 1.3em;
+    }
+    
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    table td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    table td:last-child {
+      border-bottom: 0;
+    }
+  }
